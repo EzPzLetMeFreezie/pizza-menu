@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# Papa Andrews Pizza Co. – Pizza Menu
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple React-based pizza menu that showcases dishes, sold-out states, and a time-based ordering prompt. Built with Create React App and styled with custom CSS.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Menu list: Renders 6 pizzas from local `pizzaData` with name, ingredients, price, and image.
+- Sold-out styling: Sold-out items are grayscaled and show `SOLD OUT` instead of price.
+- Open hours prompt: Displays an order prompt only during opening hours (default 12:00–22:00).
+- Clean component structure: `Header / Menu / Pizza / Footer / Order` for easy extension.
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React 18 (Create React App)
+- CSS (Grid + Flexbox)
+- Google Fonts (Roboto Mono)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+Prerequisites: Node.js 16+ and npm 8+ (or an equivalent package manager)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Install dependencies: `npm install`
+2. Start development server: `npm start`
+   - Visit `http://localhost:3000`
+3. Build for production: `npm run build`
+   - Output goes to `build/`
 
-### `npm run build`
+## Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `src/index.js`: App entry point and components (`App`, `Header`, `Menu`, `Pizza`, `Footer`, `Order`).
+- `src/index.css`: Styles for layout, colors, and component states.
+- `public/index.html`: HTML template and page title.
+- `public/pizzas/`: Image assets for the pizza menu.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Key Components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `Menu`: Computes the number of items; renders a placeholder when empty; otherwise renders `ul.pizzas`.
+- `Pizza`: Receives `pizzaObj` and toggles styles/copy based on `soldOut`.
+- `Footer`: Determines whether the store is open based on the current hour; shows a prompt or `Order` component accordingly.
+- `Order`: Displays opening hours and an “Order” button.
 
-### `npm run eject`
+## Data Model
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Each pizza object in `pizzaData` (see `src/index.js`) looks like:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+{
+  name: string,
+  ingredients: string,
+  price: number,
+  photoName: string, // e.g. "pizzas/margherita.jpg"
+  soldOut: boolean
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Design Notes
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Header: centered title with decorative lines via `::before/::after`.
+- Layout: container max-width `80rem`; menu uses two-column CSS Grid; pizza items use Flexbox.
+- Visuals: primary highlight color `#edc84b`; sold-out items use grayscale images and subdued text.
+- Typography: Roboto Mono from Google Fonts for a monospaced look.
 
-## Learn More
+## Customization
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Add a pizza: append an object to `pizzaData` in `src/index.js` and add an image under `public/pizzas/`; reference it via `photoName`.
+- Change opening hours: adjust `openHour`/`closeHour` in `Footer`/`Order` logic (currently 12–22).
+- Internationalization: extract UI copy or add an i18n layer as needed.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Acknowledgements
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is a React learning exercise; the UI and interactions are tailored for educational purposes.
